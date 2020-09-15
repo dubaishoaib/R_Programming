@@ -1,10 +1,9 @@
 ---
 title: "Introduction to R Programming"
-author: "Sana Rasheed"
-date: "May 14, 2020"
+author: "Shoaib Ahamed Soomro"
+date: "Sep 15, 2020"
 output: html_document
 ---
-
 
 ##### NOTE: 
 1. Change author name and date to your exercise submission date in above section
@@ -24,26 +23,32 @@ output: html_document
 
 ```{r }
 #### Start solution ####
+myname <- c("S","H","O","A","I","B")
+print(myname)
 ```
 
 
 ```{r }
-
+myname2 <- paste(myname, collapse = "")
+print(myname2)
 ```
 
 
 ```{r }
-
+var1 = c(100:120)
+print(var1)
 ```
 
 
 ```{r }
-
+varM = matrix(seq(2, 18, ,by = 2), nrow = 3, ncol = 3)
+print(varM)
 ```
 
 
 ```{r }
-
+dimnames(varM) <- list(c("a", "b", "c"), c("d", "e", "f"))
+print(varM)
 ```
 
 
@@ -60,16 +65,19 @@ output: html_document
 
 ```{r }
 #### Start solution ####
+emp <- factor(c("Employed", "Unemployed", "Self-Employed"), levels = c("Employed", "Unemployed", "Self-Employed"))
+print(emp)
 ```
 
 
 ```{r }
-
+empTable = table(emp)
+print(empTable)
 ```
 
 
 ```{r }
-
+unclass(emp)
 ```
 
 
@@ -97,6 +105,8 @@ output: html_document
 
 ```{r }
 #### Start solution ####
+bank_customers <- data.frame(CustomerID = c("Alicia", "Nancy", "Fernando", "Louis", "Diane"), hasAccount = c(FALSE, TRUE, TRUE, TRUE, FALSE), totalBalance = c(NA, 10000.00, 100.00, 00.00, NA))
+print(bank_customers)
 ```
 
 
@@ -139,11 +149,47 @@ output: html_document
 
 ```{r }
 #### Start solution ####
+seq1to100 <- c(1:100)
+for (i in seq1to100) {
+  if(i == 1) next;
+  is_prime <- TRUE
+  x <- seq(2, i-1)
+  for (xx in x) {
+    if (i%%xx == 0){
+      is_prime <- FALSE
+      break
+    }
+  }
+  ##cat(sprintf("%s is a prime number: %s\n", i, is_prime))
+  if(is_prime) {
+    print(i)
+  }
+}
 ```
 
 
 ```{r }
-
+seq1to100 <- c(1:100)
+loop <- 1;
+primenCounter <- 1;
+while(primenCounter <= 10) {
+  i <- seq1to100[loop]
+  loop <- loop + 1
+  if(i == 1) next;
+  is_prime <- TRUE
+  x <- seq(2, i-1)
+  for (xx in x) {
+    if (i%%xx == 0){
+      is_prime <- FALSE
+      break
+    }
+  }
+  ##cat(sprintf("%s is a prime number: %s\n", i, is_prime))
+  if(is_prime) {
+    primenCounter <- primenCounter + 1
+  }
+}
+print(seq1to100[loop-1])
 ```
 
 
@@ -178,6 +224,12 @@ output: html_document
 
 ```{r }
 #### Start solution ####
+matrix3by3 <- matrix(1:9, nrow = 3, ncol = 3)
+for (rows in seq_len(nrow(matrix3by3))) {
+     for (cols in seq_len(ncol(matrix3by3))) {
+         cat(sprintf("%sX%s = %s \n", rows, cols, matrix3by3[rows, cols]))
+     }
+}
 ```
 
 
@@ -223,6 +275,30 @@ output: html_document
 
 ```{r }
 #### Start solution ####
+factorList <- function(divisibleNumber) {
+  fList <- list()
+  counter <- 1;
+  for (factor in seq(1, divisibleNumber)) {
+    if(divisibleNumber%%factor == 0) {
+      fList[counter] = factor
+      counter <- counter + 1
+    }
+  }
+  return(fList)
+}
+
+gcd <- function(a, b) {
+    aList <- factorList(a)
+    bList <- factorList(b)
+    commonList <- intersect(aList, bList)
+    maxCommonFactor <- max(sapply(commonList, max))
+    print(maxCommonFactor)
+    return(maxCommonFactor)
+}
+a <- 8
+b <- 18
+answer <- gcd(a, b)
+cat(sprintf("A = %s, B = %s and GCD is %s \n", a, b, answer))
 ```
 
 
@@ -265,6 +341,17 @@ output: html_document
 
 ```{r }
 #### Start solution ####
+allConditionsMeet <- function(a, b) {
+    print(a)
+    print(b)
+    condition1 <- if(a) return(TRUE) else return(FALSE)
+    condition2 <- if(b) return(TRUE) else return(FALSE)
+    return(condition1 && condition2)
+}
+
+a <- 1==1
+b <- 2==2
+print(allConditionsMeet(a, b))
 ```
 
 
@@ -312,31 +399,38 @@ output: html_document
 
 ```{r }
 #### Start solution ####
+matrix_1 = matrix(1:6, nrow = 2, ncol = 3)
+matrix_2 = matrix(1:6, nrow = 3, ncol = 2)
 ```
 
 
 ```{r }
-
+##element-wise multiplication
+#not working: It works for only equally sized matrix.
+#matrix_1 * matrix_2
 ```
 
 
 ```{r }
-
+##matrix multiplication
+print(matrix_1 %*% matrix_2)
 ```
 
 
 ```{r }
-
+my_mat <- matrix(4:7, nrow = 2, ncol = 2)
 ```
 
 
 ```{r }
-
+my2by2_determinantF <- function(m2by2) {
+    return(abs(m2by2[[1,1]] * m2by2[[2,2]] - m2by2[[1,2]] * m2by2[[2,1]]))
+}
 ```
 
 
 ```{r }
-
+print(my2by2_determinantF(my_mat))
 ```
 
 
@@ -356,21 +450,27 @@ output: html_document
 
 ```{r }
 #### Start solution ####
+curr_date = Sys.Date()
+curr_time = Sys.time()
 ```
 
 
 ```{r }
-
+curr_date_posix_lt =  as.POSIXlt(curr_date)
+curr_time_possix_lt = as.POSIXlt(curr_time)
 ```
 
 
 ```{r }
-
+names(unclass(curr_time_possix_lt))
 ```
 
 
 ```{r }
-
+print(curr_time_possix_lt$wday)
+print(curr_time_possix_lt$year)
+print(curr_time_possix_lt$sec)
+print(curr_time_possix_lt$hour)
 ```
 
 
@@ -396,16 +496,19 @@ output: html_document
 
 ```{r }
 #### Start solution ####
+t1 = as.POSIXlt(Sys.time(), "America/New_York")
+print(t1)
 ```
 
 
 ```{r }
-
+t2 = as.POSIXlt(Sys.time(),  "GMT")
+print(t2)
 ```
 
 
 ```{r }
-
+print(t2-t1)
 ```
 
 
@@ -440,31 +543,55 @@ output: html_document
 
 ```{r }
 #### Start solution ####
+numbers = c(100:150)
 ```
 
 
 ```{r }
+myMeanFunc <- function(mydata) {
+  m = sum(mydata)/length(mydata)
+  return(m)
+}
+
+mySDFunc <- function(x) {
+  s <- sqrt(sum((x-myMeanFunc(x))^2/(length(x)-1)))
+  return(s)
+}
+
+numbers <- c(100:150)
+
+mySDFunc(numbers)
+
+sd(numbers)
+```
+
+
+```{r }
+xlapply <- lapply(list(numbers), mySDFunc)
+print(xlapply)
+```
+
+
+```{r }
+xsapply <- sapply(list(numbers), mySDFunc)
+print(xsapply)
 
 ```
 
 
 ```{r }
-
+dim(numbers) <- c(1,51)
+xapply <- apply(numbers, 1, mySDFunc)
+print(xapply)
+##reset numbers type
+numbers <- c(100:150)
 ```
 
 
 ```{r }
-
-```
-
-
-```{r }
-
-```
-
-
-```{r }
-
+f <- gl(1,25)
+xtapply <- tapply(numbers[26:50], f, sd, simplify = TRUE)
+print(xtapply)
 ```
 
 
@@ -484,17 +611,20 @@ output: html_document
 
 
 ```{r }
-
+mx <- matrix(1:16, nrow = 4, ncol = 4)
+print(mx)
 ```
 
 
 ```{r }
-
+cMeans <- colMeans (mx, dims = 1)
+print(cMeans)
 ```
 
 
 ```{r }
-
+rMeans = rowMeans(mx, dims = 1)
+print(rMeans)
 ```
 
 
@@ -542,17 +672,19 @@ head(Orange)
 
 
 ```{r }
-
+split_data <- split(Orange, Orange$circumference)
 ```
 
 
 ```{r }
-
+print(split_data$'30')
+print(split_data$'75')
 ```
 
 
 ```{r }
-
+print(sapply(list(split_data$'30'$age) , mean))
+print(sapply(list(split_data$'214'$age) , mean))
 ```
 
 
